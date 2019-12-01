@@ -1,0 +1,65 @@
+header{
+    width: 100%;
+    height: 120px;
+    position: relative;
+}
+header .logo{
+    position: absolute;
+    height: 70px;
+    width: 100px;
+}
+.header-black{
+    background-color: #591661;
+    width: 100%;
+    height: 10px;
+    position: relative;
+}
+header .label-projeto{
+    width: 100%;
+    height: 110px;
+    position: relative;
+    text-align: center;
+}
+header .label-projeto h1{
+    position: relative;
+    line-height: 120px;
+    font-family: 'Bree Serif', serif;
+    color: #591661;
+}
+header .cadastrar{
+    position: absolute;
+    margin-left: 1140px;
+    top: 55px;
+}
+header .cadastrar .btn{
+    background-color: #fff;
+    border: 1px solid #591661;
+    color: #591661;
+    width: 190px;
+    font-family: 'Bree Serif', serif;
+}
+header .cadastrar .btn:hover{
+    background-color: #591661;
+    border: 1px solid #fff;
+    color: #fff;
+    width: 190px;
+    font-family: 'Bree Serif', serif;
+}
+footer .desc{
+    height: 65px;
+    width: 100%;
+    margin-top: 25px;
+    text-align: center;
+}
+footer .desc h4{
+
+    line-height: 25px;
+    font-family: 'Bree Serif', serif;
+    font-size: 0.8em;
+    color: #591661;
+}
+#listagem{
+    margin-top: 30px;
+    width: 80%;
+    margin-left: 140px;
+}
