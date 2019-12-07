@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost/motos", { useNewUrlParser: true, useUnifiedTopology: true});
 
 const Schema = mongoose.Schema;
-const Model = mongoose.model;
 
 const MotosSchema = new Schema({
     name: String,
@@ -13,6 +12,4 @@ const MotosSchema = new Schema({
 	autonomy: String
  });
 
- const MotoModel = new Model('MotoModel', MotosSchema);
-
- module.exports = MotoModel;
+ module.exports = MotosSchema;

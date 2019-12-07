@@ -1,11 +1,19 @@
 const express = require('express');
 
-const MotoModel = require('./database');
+const mongoose = require('mongoose');
+
+const MotosSchema = require('./database');
+
+const MotoModel = require('./model');
 
 const router = express.Router();
 
+const motosFromBanco = mongoose.model('MotoModel', MotosSchema);
+
 router.post('/cadastro', async(req, res) => {
+    
     const novaMoto = await new MotoModel(req.body);
+
     novaMoto.save((err)=>{
         if(err){
             console.log(err);
@@ -13,6 +21,41 @@ router.post('/cadastro', async(req, res) => {
         }
         res.send({novaMoto});
     });
+
+});
+
+router.get('/listar', (req, res) => {
+    
+    var motosList = motosFromBanco.find(); 
+
+    return res.send({motosList});
+
+});
+
+router.put('/alterar', async(req, res) => {
+    motosFromBanco.update({_Id: req.body._Id}, {name: req.body.name, 
+                                                desc: req.body.desc, 
+                                                horses: req.body.horses, 
+                                                color: req.body.color, 
+                                                autonomy: req.body.autonomy
+    }, (err)=>{
+        if(err){
+            console.log(err)
+            return res.send(err);
+        }
+        else{
+            return res.send("atualizado com sucesso!");	
+        }
+    })
+});
+
+router.delete('/excluir', async(req, res) => {
+    motosFromBanco.deleteOne({_id: req.body}, (err)=>{
+        if(err){
+            return res.send(err);
+        }
+        res.send("Moto excluída!")
+    })
 });
 
 module.exports = app => app.use('/funcao', router);
