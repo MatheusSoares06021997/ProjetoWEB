@@ -52,6 +52,20 @@
 <script>
 
   function carregarDados() {
+    function atualizar(e) {
+      localStorage.setItem("idMoto", e.currentTarget.dataset.id);
+      window.location.href = 'editar.html';
+    }
+  
+  
+    function deletar(e) {
+      $.ajax({
+        url: "http://localhost:4200/funcao/excluir",
+        method: 'DELETE',
+        data: { id: e.currentTarget.dataset.id }
+      })
+      window.location.reload();
+    }
     $.get("http://localhost:4200/funcao/listar", function (data) {
 
       var tr = $("#resultados");
@@ -66,31 +80,17 @@
               <td>${item.color}</td>
               <td>${item.autonomy}</td>
               <td>
-                  <a href="#" id="editar" data-id="${item._id}"><img src="./img/icons8-editar-ligação-24.png" alt="Editar"></a>
-                  <a href="#" id="excluir" data-id="${item._id}"><img src="./img/icons8-excluir-24.png" alt="Excluir"></a>
+                  <a href="#" class="editar" data-id="${item._id}"><img src="./img/icons8-editar-ligação-24.png" alt="Editar"></a>
+                  <a href="#" class="excluir" data-id="${item._id}"><img src="./img/icons8-excluir-24.png" alt="Excluir"></a>
               </td>
             </tr>`
         ));
       tr.append(html.join(''));
-      $('#editar').click(atualizar);
-      $('#excluir').click(deletar);
+      $('.editar').click(atualizar);
+      $('.excluir').click(deletar);
     })
   }
 
-  function atualizar(e) {
-    localStorage.setItem("idMoto", e.currentTarget.dataset.id);
-    window.location.href = 'editar.html';
-  }
-
-
-  function deletar(e) {
-    $.ajax({
-      url: "http://localhost:4200/funcao/excluir",
-      method: 'DELETE',
-      data: { id: e.currentTarget.dataset.id }
-    })
-    window.location.reload();
-  }
 </script>
 
 </html>
