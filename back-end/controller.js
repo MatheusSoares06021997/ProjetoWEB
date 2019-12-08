@@ -26,11 +26,10 @@ router.post('/cadastro', async (req, res) => {
 
 router.get('/listar', (req, res) => {
 
-    var motosList = motosFromBanco.find();
-    console.log(motosList);
-
-    return res.send({ motosList });
-
+    motosFromBanco.find((err, data) => {
+        console.log(data);
+        return res.send({ data });
+    });
 });
 
 router.put('/alterar', (req, res) => {
