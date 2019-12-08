@@ -1,114 +1,77 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="style.css">
-        <link href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <header>
-            <div class="logo">
-                <img id="logotipo" src="img/free_horizontal_on_white_by_logaster (1).png" alt="Logotipo">
-            </div>
-            <div class="header-black"></div>
-            <div class="label-projeto">
-                <h1>PROJETO WEB - MOTOCICLETAS</h1>
-            </div>
-            <div class="cadastrar">
-                <a href="cadastrar.html"><button type="button" class="btn">Cadastrar motocicleta</button></a>
-            </div>
-        </header>
-        <section>
-            <div id="listagem">
-              <table class="table">
-                  <thead class="thead-dark">
-                    <tr>
-                      <th scope="col">ID</th>
-                      <th scope="col">Modelo</th>
-                      <th scope="col">Descrição</th>
-                      <th scope="col">Cavalos</th>
-                      <th scope="col">Cor</th>
-                      <th scope="col">Autonomia</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Honda titan 125ks</td>
-                      <td>Honda Titan 125ks</td>
-                      <td>60</td>
-                      <td>Vermelho</td>
-                      <td>150km/tanque</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Honda titan 125ks</td>
-                      <td>Honda Titan 125ks</td>
-                      <td>60</td>
-                      <td>Vermelho</td>
-                      <td>150km/tanque</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Honda titan 125ks</td>
-                      <td>Honda Titan 125ks</td>
-                      <td>60</td>
-                      <td>Vermelho</td>
-                      <td>150km/tanque</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Honda titan 125ks</td>
-                      <td>Honda Titan 125ks</td>
-                      <td>60</td>
-                      <td>Vermelho</td>
-                      <td>150km/tanque</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Honda titan 125ks</td>
-                      <td>Honda Titan 125ks</td>
-                      <td>60</td>
-                      <td>Vermelho</td>
-                      <td>150km/tanque</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Honda titan 125ks</td>
-                      <td>Honda Titan 125ks</td>
-                      <td>60</td>
-                      <td>Vermelho</td>
-                      <td>150km/tanque</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Honda titan 125ks</td>
-                      <td>Honda Titan 125ks</td>
-                      <td>60</td>
-                      <td>Vermelho</td>
-                      <td>150km/tanque</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Honda titan 125ks</td>
-                      <td>Honda Titan 125ks</td>
-                      <td>60</td>
-                      <td>Vermelho</td>
-                      <td>150km/tanque</td>
-                    </tr>
-                  </tbody>
-              </table>
-            </div>
-        </section>
-        <footer>
-            <div class="desc">
-                <h4>Projeto para a disciplina de programação Web<br>
-                    Alunos: Matheus Soares e Daniel Galetti</h4> 
-            </div>
-            <div class="header-black"></div>
-        </footer>
-        <script src="script.js"></script>
-    </body>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap" rel="stylesheet">
+</head>
+
+<body onload="carregarDados()">
+  <header>
+    <div class="logo">
+      <img id="logotipo" src="img/free_horizontal_on_white_by_logaster (1).png" alt="Logotipo">
+    </div>
+    <div class="header-black"></div>
+    <div class="label-projeto">
+      <h1>PROJETO WEB - MOTOCICLETAS</h1>
+    </div>
+    <div class="cadastrar">
+      <a href="cadastrar.html"><button type="button" class="btn">Cadastrar motocicleta</button></a>
+    </div>
+  </header>
+  <section>
+    <div id="listagem">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Modelo</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Cavalos</th>
+            <th scope="col">Cor</th>
+            <th scope="col">Autonomia</th>
+          </tr>
+        </thead>
+        <tbody >
+          <ul id="resultado"></ul>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <footer>
+    <div class="desc">
+      <h4>Projeto para a disciplina de programação Web<br>
+        Alunos: Matheus Soares e Daniel Galetti</h4>
+    </div>
+    <div class="header-black"></div>
+  </footer>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+  function carregarDados() {
+    $.get("http://localhost:4200/funcao/listar", function (data) {
+
+      var ul = $("#resultados");
+
+      console.log(data);
+
+      $.each(data, function () {
+        ul.append(
+          `<tr>
+                <th> scope="row">${this._Id}</th>
+                <td>${this.name}</td>
+                <td>${this.desc}</td>
+                <td>${this.horses}</td>
+                <td>${this.color}</td>
+                <td>${this.autonomy}</td>
+            </tr>`
+        )
+      })
+    })
+  }
+</script>
+
 </html>

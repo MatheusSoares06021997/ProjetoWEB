@@ -27,7 +27,6 @@ router.post('/cadastro', async (req, res) => {
 router.get('/listar', (req, res) => {
 
     motosFromBanco.find((err, data) => {
-        console.log(data);
         return res.send({ data });
     });
 });
