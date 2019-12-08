@@ -31,7 +31,7 @@ router.get('/listar', (req, res) => {
     });
 });
 
-router.put('/alterar', (req, res) => {
+router.put('/alterar', async (req, res) => {
     motosFromBanco.findByIdAndUpdate(req.body._Id, {
         name: req.body.name,
         desc: req.body.desc,
@@ -50,7 +50,7 @@ router.put('/alterar', (req, res) => {
 });
 
 router.delete('/excluir', async (req, res) => {
-    motosFromBanco.deleteOne({ _id: req.body }, (err) => {
+    motosFromBanco.deleteOne({ _id: req.body.id }, (err) => {
         if (err) {
             return res.send(err);
         }

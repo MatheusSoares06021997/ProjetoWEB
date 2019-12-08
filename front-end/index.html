@@ -27,16 +27,15 @@
       <table class="table">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">ID</th>
             <th scope="col">Modelo</th>
             <th scope="col">Descrição</th>
             <th scope="col">Cavalos</th>
             <th scope="col">Cor</th>
             <th scope="col">Autonomia</th>
+            <th scope="col">Opção</th>
           </tr>
         </thead>
-        <tbody >
-          <ul id="resultado"></ul>
+        <tbody id="resultados">
         </tbody>
       </table>
     </div>
@@ -51,26 +50,46 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script>
+
   function carregarDados() {
     $.get("http://localhost:4200/funcao/listar", function (data) {
 
-      var ul = $("#resultados");
-
-      console.log(data);
-
-      $.each(data, function () {
-        ul.append(
-          `<tr>
-                <th> scope="row">${this._Id}</th>
-                <td>${this.name}</td>
-                <td>${this.desc}</td>
-                <td>${this.horses}</td>
-                <td>${this.color}</td>
-                <td>${this.autonomy}</td>
+      var tr = $("#resultados");
+      const dados = data.data;
+      let html = [];
+      dados.forEach((item) =>
+        html.push(`
+            <tr>
+              <td>${item.name}</td>
+              <td>${item.desc}</td>
+              <td>${item.horses}</td>
+              <td>${item.color}</td>
+              <td>${item.autonomy}</td>
+              <td>
+                  <a href="#" id="editar" data-id="${item._id}"><img src="./img/icons8-editar-ligação-24.png" alt="Editar"></a>
+                  <a href="#" id="excluir" data-id="${item._id}"><img src="./img/icons8-excluir-24.png" alt="Excluir"></a>
+              </td>
             </tr>`
-        )
-      })
+        ));
+      tr.append(html.join(''));
+      $('#editar').click(atualizar);
+      $('#excluir').click(deletar);
     })
+  }
+
+  function atualizar(e) {
+    localStorage.setItem("idMoto", e.currentTarget.dataset.id);
+    window.location.href = 'editar.html';
+  }
+
+
+  function deletar(e) {
+    $.ajax({
+      url: "http://localhost:4200/funcao/excluir",
+      method: 'DELETE',
+      data: { id: e.currentTarget.dataset.id }
+    })
+    window.location.reload();
   }
 </script>
 

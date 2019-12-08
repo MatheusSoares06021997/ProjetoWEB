@@ -28,28 +28,28 @@
         </div>
         <form class="form-cadastrar">
             <div class="form-group">
-                <label for="modelo">Modelo</label>
-                <input type="text" class="form-control" id="modelo" placeholder="Digite o modelo" required>
+                <label for="name">Modelo</label>
+                <input type="text" class="form-control" id="name" placeholder="Digite o modelo" required>
             </div>
             <div class="form-group">
-                <label for="descricao">Descrição</label>
-                <textarea class="form-control" id="descricao" rows="2" placeholder="Digite a descrição"></textarea>
+                <label for="desc">Descrição</label>
+                <textarea class="form-control" id="desc" rows="2" placeholder="Digite a descrição"></textarea>
             </div>
             <div class="form-group">
-                <label for="cavalo">Cavalos</label>
-                <input type="number" class="form-control" id="cavalo" placeholder="Digite o número de cavalos de potência" required>
+                <label for="horses">Cavalos</label>
+                <input type="text" class="form-control" id="horses" placeholder="Digite o número de cavalos de potência" required>
             </div>
             <div class="form-group">
-                <label for="cor">Cor</label>
-                <input type="text" class="form-control" id="cor" placeholder="Digite a cor" required>
+                <label for="color">Cor</label>
+                <input type="text" class="form-control" id="color" placeholder="Digite a cor" required>
             </div>
             <div class="form-group">
-                <label for="autonomia">Autonomia</label>
-                <input type="text" class="form-control" id="autonomia" placeholder="Digite a autonomia" required>
+                <label for="autonomy">Autonomia</label>
+                <input type="text" class="form-control" id="autonomy" placeholder="Digite a autonomia" required>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                  <button class="btn">Salvar</button>
+                    <a class="btn" href="index.html" id="salvar">Salvar</a>
                 </div>
                 <div class="form-group col-md-6">
                     <a class="btn" href="index.html">Cancelar</a>
@@ -64,8 +64,34 @@
         </div>
         <div class="header-black"></div>
     </footer>
-    <script src="script.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
 </body>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
+    <script>
+    $(document).ready(carregarDados);
+    $('#salvar').click(atualizar);
+    function carregarDados() {
+        $.get("http://localhost:4200/funcao/listar", function (data) {
+            var id = localStorage.getItem('idMoto');
+            var item = data.data.filter(f => f._id == id)[0];
+            Array.from(document.querySelectorAll('.form-control')).forEach(f => f.value = item[f.id]); 
+        });
+        
+    }
+    function atualizar(e) {
+        var item = {};
+        Array.from(document.querySelectorAll('.form-control')).forEach(f => item[f.id] = f.value);
+        item._Id = localStorage.getItem('idMoto');
+        $.ajax('http://localhost:4200/funcao/alterar', {
+            data: item,
+            method: 'PUT',
+            success: (data) => {
+                console.log('CHUPA MATHIAS COLOCA O QUE VOCE QUISER AQUI');
+            },
+            error: (error) => {
+                console.log(error);
+            }
+        })
+    }
+    </script>
 </html>
