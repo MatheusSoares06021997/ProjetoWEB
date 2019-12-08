@@ -10,48 +10,50 @@ const router = express.Router();
 
 const motosFromBanco = mongoose.model('MotoModel', MotosSchema);
 
-router.post('/cadastro', async(req, res) => {
-    
+router.post('/cadastro', async (req, res) => {
+
     const novaMoto = await new MotoModel(req.body);
 
-    novaMoto.save((err)=>{
-        if(err){
+    novaMoto.save((err) => {
+        if (err) {
             console.log(err);
-            return res.status(400).send({error: 'Falha ao cadastrar!'})
+            return res.status(400).send({ error: 'Falha ao cadastrar!' })
         }
-        res.send({novaMoto});
+        res.send({ novaMoto });
     });
 
 });
 
 router.get('/listar', (req, res) => {
-    
-    var motosList = motosFromBanco.find(); 
 
-    return res.send({motosList});
+    var motosList = motosFromBanco.find();
+    console.log(motosList);
+
+    return res.send({ motosList });
 
 });
 
-router.put('/alterar', async(req, res) => {
-    motosFromBanco.update({_Id: req.body._Id}, {name: req.body.name, 
-                                                desc: req.body.desc, 
-                                                horses: req.body.horses, 
-                                                color: req.body.color, 
-                                                autonomy: req.body.autonomy
-    }, (err)=>{
-        if(err){
+router.put('/alterar', (req, res) => {
+    motosFromBanco.findByIdAndUpdate(req.body._Id, {
+        name: req.body.name,
+        desc: req.body.desc,
+        horses: req.body.horses,
+        color: req.body.color,
+        autonomy: req.body.autonomy
+    }, (err, data) => {
+        if (err) {
             console.log(err)
             return res.send(err);
         }
-        else{
-            return res.send("atualizado com sucesso!");	
+        else {
+            return res.send("atualizado com sucesso!");
         }
-    })
+    });
 });
 
-router.delete('/excluir', async(req, res) => {
-    motosFromBanco.deleteOne({_id: req.body}, (err)=>{
-        if(err){
+router.delete('/excluir', async (req, res) => {
+    motosFromBanco.deleteOne({ _id: req.body }, (err) => {
+        if (err) {
             return res.send(err);
         }
         res.send("Moto excluída!")
