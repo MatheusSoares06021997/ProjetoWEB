@@ -7,6 +7,7 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./bootstrap-sweetalert-master/dist/sweetalert.css">
 </head>
 
 <body onload="carregarDados()">
@@ -48,6 +49,7 @@
     <div class="header-black"></div>
   </footer>
 </body>
+<script src="./bootstrap-sweetalert-master/dist/sweetalert.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script>
 
@@ -56,15 +58,33 @@
       localStorage.setItem("idMoto", e.currentTarget.dataset.id);
       window.location.href = 'editar.html';
     }
-  
-  
+
+
     function deletar(e) {
-      $.ajax({
-        url: "http://localhost:4200/funcao/excluir",
-        method: 'DELETE',
-        data: { id: e.currentTarget.dataset.id }
-      })
-      window.location.reload();
+      swal({
+        title: "Tem certeza que deseja deletar esta moto ?",
+        text: "Este arquivo não poderá ser recuperado.",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Sim",
+        cancelButtonText: "Não",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+        function (isConfirm) {
+          if (isConfirm) {
+            $.ajax({
+              url: "http://localhost:4200/funcao/excluir",
+              method: 'DELETE',
+              data: { id: e.currentTarget.dataset.id }
+            })
+            swal("Deletado!", "Este moto foi deletada.", "success");
+            window.location.reload();
+          } else {
+            swal("Cancelado!", "Operação cancelada!", "error");
+          }
+        });
     }
     $.get("http://localhost:4200/funcao/listar", function (data) {
 
